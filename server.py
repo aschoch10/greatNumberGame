@@ -1,7 +1,17 @@
-from flask import Flask 
+from flask import Flask, render_template, request, redirect, session
 app = Flask(__name__)
+app.secret_key = 'super, super secreat'
+
+
 @app.route('/')
-def hello_world():
+def helloWorld():
     return 'Hello World!'
-if __name__=="__main__":
+
+
+@app.route('/home')
+def home():
+    return render_template("index.html")
+
+
+if __name__ == "__main__":
     app.run(debug=True)
