@@ -5,12 +5,18 @@ app.secret_key = 'super, super secreat'
 
 @app.route('/')
 def helloWorld():
-    return 'Hello World!'
+    return 'User Submitted!'
 
 
 @app.route('/home')
 def home():
     return render_template("index.html")
+
+@app.route('/submit', methods=['POST'])
+def create_user():
+    print("Succesful post")
+    print("post info: ", request.form)
+    return redirect('/')
 
 
 if __name__ == "__main__":
