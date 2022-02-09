@@ -1,14 +1,9 @@
 from flask import Flask, render_template, request, redirect, session
 app = Flask(__name__)
-app.secret_key = 'super, super secreat'
+app.secret_key = 'super, super secret key name'
 
 
 @app.route('/')
-def helloWorld():
-    return 'User Submitted!'
-
-
-@app.route('/home')
 def home():
     return render_template("index.html")
 
@@ -16,6 +11,7 @@ def home():
 def create_user():
     print("Succesful post")
     print("post info: ", request.form)
+    session['number'] = request.form['number']
     return redirect('/')
 
 
