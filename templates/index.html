@@ -10,13 +10,47 @@
 <body>
     <div class="container text-center w-25">
         <h2>Welcome to the Great Number Guessing Game!</h2>
-        <p>Your guess: {{session['number']}}</p>
-
+        
         <form action="/submit" method="POST" class="form">
-            <label for="number">Pick a number between 1-100:</label>
+            <label for="guessNumber">Pick a number between 1-100:</label>
             <input type="text" name ="number" class="form-control">
             <button class="btn btn-warning">Submit</button>
         </form>
+        
+        <p>Your last guess: {{session['number']}}</p>
+        <p>Number of Guesses: {{session['count']}}</p>
+
+        {% if 'done' in session: %}
+        <p>You lose!</p>
+        {% endif %}
+
+
+        {% if 'number' in session: %}
+            {% if session['number'] == session['targetNumber'] %}
+                <div class="card bg-success">
+                    <h2>You got the number!</h2>
+                    <a href="/reset" class="btn btn-primary">Play Again</a>
+                </div>
+                {% elif session['number'] > 2 %}
+                <div class="card bg-danger">
+                    <h2>Too many guesses, you lose</h2>
+                    <a href="/reset" class="btn btn-warning">Reset</a>
+                    
+                </div>
+            
+            {% elif session['number'] < session['targetNumber'] %}
+                <div class="card bg-danger">
+                    <h2>Too Low!!!</h2>
+                    
+                </div>
+            {% else %}
+                <div class="card bg-danger">
+                    <h2>Too High!!!</h2>
+                </div>
+            {% endif %}
+        {% endif %}
+
+
     </div>
 </body>
 </html>
