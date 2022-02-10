@@ -16,10 +16,13 @@ def home():
     return render_template("index.html")
 
 @app.route('/submit', methods=['POST'])
-def create_user():
+def guess():
     # print("Succesful post")
     # print("post info: ", request.form)
-    session['number'] = int(request.form['number'])
+    if request.form['number'] == '':
+        session['number'] = 0
+    else:
+        session['number'] = int(request.form['number'])
     target = session['targetNumber']
     print("Target number is:", target)
     session['count'] = 0
